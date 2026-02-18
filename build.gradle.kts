@@ -30,6 +30,7 @@ openApi {
         workingDir.set(file(projectDir))
         args.set(
             listOf(
+                "--spring.profiles.active=openapi",
                 "--spring.datasource.url=jdbc:h2:mem:testdb",
                 "--spring.datasource.driver-class-name=org.h2.Driver"
             )
@@ -50,6 +51,8 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-restclient")
     implementation("org.springframework.boot:spring-boot-starter-validation")
     implementation("org.springframework.boot:spring-boot-starter-webmvc")
+    implementation("org.springframework.boot:spring-boot-starter-security")
+    implementation("org.springframework.boot:spring-boot-starter-oauth2-resource-server")
     implementation("org.springframework.cloud:spring-cloud-starter-circuitbreaker-resilience4j")
     implementation("org.springdoc:springdoc-openapi-starter-webmvc-ui:3.0.0")
     compileOnly("org.projectlombok:lombok")
@@ -101,5 +104,9 @@ tasks.named("generateOpenApiDocs") {
 }
 
 tasks.named("forkedSpringBootRun") {
+    notCompatibleWithConfigurationCache("springdoc-openapi-gradle-plugin is not yet compatible")
+}
+
+tasks.named("forkedSpringBootStop") {
     notCompatibleWithConfigurationCache("springdoc-openapi-gradle-plugin is not yet compatible")
 }
