@@ -13,9 +13,9 @@ services:
       # Configure the health-checker binary
       - THC_PORT=8080
       - THC_PATH=/actuator/health
-      - JWT_TRUSTED_ISSUER=http://keycloak:8081/realms/school
+      - JWT_TRUSTED_ISSUER=${JWT_TRUSTED_ISSUER}
     healthcheck:
-      test: ["CMD", "/workspace/health-check"]
+      test: [ "CMD", "/workspace/health-check" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -23,14 +23,36 @@ services:
     depends_on:
       db:
         condition: service_healthy
+      keycloak:
+        condition: service_healthy
+
+  keycloak-provisioner:
+    image: hashicorp/terraform:1.14
+    container_name: keycloak-provisioner
+    volumes:
+      - ./keycloak-provisioner:/keycloak-provisioner
+    working_dir: /keycloak-provisioner
+    entrypoint: /bin/sh
+    command: -c "terraform init && terraform apply -auto-approve"
+    environment:
+      - TF_VAR_keycloak_url=http://keycloak:11000
+      - TF_VAR_keycloak_admin_user=${KC_BOOTSTRAP_ADMIN_USERNAME}
+      - TF_VAR_keycloak_admin_password=${KC_BOOTSTRAP_ADMIN_PASSWORD}
+      - TF_VAR_school_api_client_secret=${KC_SCHOOL_API_CLIENT_SECRET}
+      - TF_VAR_default_user_password=${KC_DEFAULT_USER_PASSWORD}
+    depends_on:
+      keycloak:
+        condition: service_healthy
 
   keycloak:
     image: quay.io/keycloak/keycloak:26.0
     container_name: keycloak
     command: start-dev
     ports:
-      - "8081:8080"
+      - "11000:11000"
     environment:
+      - KC_HTTP_PORT=11000
+      - KC_HEALTH_ENABLED=true
       - KC_BOOTSTRAP_ADMIN_USERNAME=${KC_BOOTSTRAP_ADMIN_USERNAME}
       - KC_BOOTSTRAP_ADMIN_PASSWORD=${KC_BOOTSTRAP_ADMIN_PASSWORD}
       - KC_DB=postgres
@@ -38,6 +60,12 @@ services:
       - KC_DB_USERNAME=${DB_USER}
       - KC_DB_PASSWORD=${DB_PASS}
       - KC_DB_SCHEMA=keycloak
+    healthcheck:
+      test: [ "CMD-SHELL", "exec 3<>/dev/tcp/127.0.0.1/9000 && echo -e 'GET /health/ready HTTP/1.1\r\nHost: localhost\r\nConnection: close\r\n\r\n' >&3 && cat <&3 | grep -q '200 OK'" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
     depends_on:
       db:
         condition: service_healthy

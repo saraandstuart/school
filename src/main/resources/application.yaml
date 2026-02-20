@@ -18,7 +18,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://keycloak:8081/realms/school
+          issuer-uri: ${JWT_TRUSTED_ISSUER}
   config:
     import:
       - optional:file:./.env[.properties]
