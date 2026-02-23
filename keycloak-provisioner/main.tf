@@ -18,6 +18,7 @@ resource "keycloak_user" "student_user" {
   username   = "student1"
   enabled    = true
   email      = "shannoncodelimited+student1@gmail.com"
+  email_verified = true
   first_name = "Student"
   last_name  = "One"
 
@@ -32,6 +33,7 @@ resource "keycloak_user" "admin_user" {
   username   = "admin1"
   enabled    = true
   email      = "shannoncodelimited+admin1@gmail.com"
+  email_verified = true
   first_name = "Admin"
   last_name  = "One"
 

@@ -78,19 +78,4 @@ public class SchoolApplication {
         return http.build();
     }
 
-//    @Bean
-//    public InMemoryUserDetailsManager userDetailsService() {
-//        UserDetails admin = User.withUsername("admin")
-//            .password("{noop}admin123") // {noop} for plain text in dev only!
-//            .roles("ADMIN")
-//            .build();
-//
-//        UserDetails student = User.withUsername("student1")
-//            .password("{noop}pass123")
-//            .roles("STUDENT")
-//            .build();
-//
-//        return new InMemoryUserDetailsManager(admin, student);
-//    }
-
 }
