@@ -1,5 +1,6 @@
 package com.shannoncode.school.controller;
 
+import com.shannoncode.school.common.exception.ResourceNotFoundException;
 import java.nio.file.AccessDeniedException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -16,11 +17,23 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(AccessDeniedException.class)
     public ResponseEntity<ErrorResponse> handleAccessDenied(AccessDeniedException ex) {
         ErrorResponse error = new ErrorResponse(
+            LocalDateTime.now(),
             HttpStatus.FORBIDDEN.value(),
             "Access Denied",
             "You are not enrolled in this course. Please sign up to view its content."
         );
         return new ResponseEntity<>(error, HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<ErrorResponse> handleNotFound(ResourceNotFoundException ex) {
+        ErrorResponse error = new ErrorResponse(
+            LocalDateTime.now(),
+            HttpStatus.NOT_FOUND.value(),
+            "Not Found",
+            ex.getMessage()
+        );
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -40,6 +53,6 @@ public class GlobalExceptionHandler {
     }
 
     // A simple DTO for the error body
-    public record ErrorResponse(int status, String error, String message) {
+    public record ErrorResponse(LocalDateTime timeStamp, int status, String error, String message) {
     }
 }
