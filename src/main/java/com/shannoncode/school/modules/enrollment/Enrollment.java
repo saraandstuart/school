@@ -1,5 +1,7 @@
-package com.shannoncode.school.model;
+package com.shannoncode.school.modules.enrollment;
 
+import com.shannoncode.school.modules.profile.Profile;
+import com.shannoncode.school.modules.course.Course;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;

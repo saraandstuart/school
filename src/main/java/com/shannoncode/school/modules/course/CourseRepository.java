@@ -1,6 +1,5 @@
-package com.shannoncode.school.repository;
+package com.shannoncode.school.modules.course;
 
-import com.shannoncode.school.model.Course;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CourseRepository extends JpaRepository<Course, Long> {

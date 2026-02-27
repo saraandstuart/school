@@ -1,6 +1,6 @@
-package com.shannoncode.school.component;
+package com.shannoncode.school.modules.course;
 
-import com.shannoncode.school.repository.EnrollmentRepository;
+import com.shannoncode.school.modules.enrollment.EnrollmentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

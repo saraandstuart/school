@@ -1,5 +1,6 @@
-package com.shannoncode.school.model;
+package com.shannoncode.school.modules.profile;
 
+import com.shannoncode.school.modules.enrollment.Enrollment;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;

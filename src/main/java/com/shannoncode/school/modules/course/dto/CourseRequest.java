@@ -1,4 +1,4 @@
-package com.shannoncode.school.dto;
+package com.shannoncode.school.modules.course.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;

@@ -1,7 +1,7 @@
-package com.shannoncode.school.component;
+package com.shannoncode.school.common.security.converter;
 
-import com.shannoncode.school.model.Profile;
-import com.shannoncode.school.repository.ProfileRepository;
+import com.shannoncode.school.modules.profile.Profile;
+import com.shannoncode.school.modules.profile.ProfileRepository;
 import java.util.Collection;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.convert.converter.Converter;

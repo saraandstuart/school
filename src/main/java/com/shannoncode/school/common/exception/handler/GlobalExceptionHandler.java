@@ -1,12 +1,12 @@
-package com.shannoncode.school.controller;
+package com.shannoncode.school.common.exception.handler;
 
 import com.shannoncode.school.common.exception.ResourceNotFoundException;
-import java.nio.file.AccessDeniedException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -19,8 +19,8 @@ public class GlobalExceptionHandler {
         ErrorResponse error = new ErrorResponse(
             LocalDateTime.now(),
             HttpStatus.FORBIDDEN.value(),
-            "Access Denied",
-            "You are not enrolled in this course. Please sign up to view its content."
+            "Forbidden",
+            ex.getMessage()
         );
         return new ResponseEntity<>(error, HttpStatus.FORBIDDEN);
     }

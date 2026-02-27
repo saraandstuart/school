@@ -1,6 +1,5 @@
-package com.shannoncode.school.repository;
+package com.shannoncode.school.modules.enrollment;
 
-import com.shannoncode.school.model.Enrollment;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface EnrollmentRepository extends JpaRepository<Enrollment, Long> {

@@ -1,11 +1,9 @@
-package com.shannoncode.school.service;
+package com.shannoncode.school.modules.course;
 
 import com.shannoncode.school.common.exception.ResourceNotFoundException;
-import com.shannoncode.school.dto.CourseRequest;
-import com.shannoncode.school.dto.CourseResponse;
-import com.shannoncode.school.mapper.CourseMapper;
-import com.shannoncode.school.model.Course;
-import com.shannoncode.school.repository.CourseRepository;
+import com.shannoncode.school.modules.course.dto.CourseRequest;
+import com.shannoncode.school.modules.course.dto.CourseResponse;
+import com.shannoncode.school.common.mapper.CourseMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

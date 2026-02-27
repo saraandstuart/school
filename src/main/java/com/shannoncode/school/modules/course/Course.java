@@ -1,4 +1,4 @@
-package com.shannoncode.school.model;
+package com.shannoncode.school.modules.course;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

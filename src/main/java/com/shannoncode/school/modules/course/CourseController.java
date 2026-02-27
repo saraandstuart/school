@@ -1,8 +1,7 @@
-package com.shannoncode.school.controller;
+package com.shannoncode.school.modules.course;
 
-import com.shannoncode.school.dto.CourseRequest;
-import com.shannoncode.school.dto.CourseResponse;
-import com.shannoncode.school.service.CourseService;
+import com.shannoncode.school.modules.course.dto.CourseRequest;
+import com.shannoncode.school.modules.course.dto.CourseResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;

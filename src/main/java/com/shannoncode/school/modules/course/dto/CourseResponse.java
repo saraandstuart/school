@@ -1,4 +1,4 @@
-package com.shannoncode.school.dto;
+package com.shannoncode.school.modules.course.dto;
 
 public record CourseResponse(
     Long id,
