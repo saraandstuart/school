@@ -2,6 +2,7 @@ package com.shannoncode.school.modules.course;
 
 import com.shannoncode.school.modules.course.dto.CourseRequest;
 import com.shannoncode.school.modules.course.dto.CourseResponse;
+import com.shannoncode.school.modules.course.dto.CourseSearchRequest;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
@@ -27,7 +28,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/v1/course")
+@RequestMapping("/api/v1/course")
 @Tag(name = "Course", description = "API for managing courses")
 public class CourseController {
 
@@ -64,8 +65,17 @@ public class CourseController {
             size = 20,
             sort = "name",
             direction = Sort.Direction.DESC
-        ) Pageable pageable) {
+        ) Pageable pageable
+    ) {
         return ResponseEntity.ok(courseService.getAllCourses(pageable));
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<Page<CourseResponse>> search(
+        @ParameterObject CourseSearchRequest searchRequest,
+        @ParameterObject @PageableDefault(size = 20) Pageable pageable
+    ) {
+        return ResponseEntity.ok(courseService.searchCourses(searchRequest, pageable));
     }
 
     @DeleteMapping("/{id}")

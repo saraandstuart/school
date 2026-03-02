@@ -24,7 +24,7 @@ public class SecurityConfig {
     @Bean
     @Order(0)
     @Profile("openapi")
-    public SecurityFilterChain openApiSecurityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain openApiSecurityFilterChain(HttpSecurity http) {
         http
             .csrf(AbstractHttpConfigurer::disable)
             .sessionManagement(sm -> sm.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
@@ -58,8 +58,8 @@ public class SecurityConfig {
     ) {
         http
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers(HttpMethod.GET, "/v1/course/**").permitAll()
-                .requestMatchers("/v1/course/**").hasRole("ADMIN")
+                .requestMatchers(HttpMethod.GET, "/api/v1/course/**").permitAll()
+                .requestMatchers("/api/v1/course/**").hasRole("ADMIN")
                 .requestMatchers(
                     "/api-docs",
                     "/api-docs/**",

@@ -1,6 +1,7 @@
 package com.shannoncode.school.common.exception.handler;
 
 import com.shannoncode.school.common.exception.ResourceNotFoundException;
+import com.shannoncode.school.common.exception.dto.ErrorResponse;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -50,9 +51,5 @@ public class GlobalExceptionHandler {
         response.put("errors", errors);
 
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
-    }
-
-    // A simple DTO for the error body
-    public record ErrorResponse(LocalDateTime timeStamp, int status, String error, String message) {
     }
 }

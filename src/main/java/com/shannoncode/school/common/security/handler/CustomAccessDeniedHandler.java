@@ -1,6 +1,6 @@
 package com.shannoncode.school.common.security.handler;
 
-import com.shannoncode.school.common.exception.handler.GlobalExceptionHandler;
+import com.shannoncode.school.common.exception.dto.ErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -25,7 +25,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
         response.setContentType("application/json");
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
 
-        var error = new GlobalExceptionHandler.ErrorResponse(
+        var error = new ErrorResponse(
             LocalDateTime.now(),
             403,
             "Forbidden",

@@ -1,12 +1,14 @@
 package com.shannoncode.school.modules.course;
 
 import com.shannoncode.school.common.exception.ResourceNotFoundException;
+import com.shannoncode.school.common.mapper.CourseMapper;
 import com.shannoncode.school.modules.course.dto.CourseRequest;
 import com.shannoncode.school.modules.course.dto.CourseResponse;
-import com.shannoncode.school.common.mapper.CourseMapper;
+import com.shannoncode.school.modules.course.dto.CourseSearchRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -35,6 +37,13 @@ public class CourseService {
 
     public Page<CourseResponse> getAllCourses(Pageable pageable) {
         return repository.findAll(pageable)
+            .map(mapper::toResponse);
+    }
+
+    public Page<CourseResponse> searchCourses(CourseSearchRequest searchRequest, Pageable pageable) {
+        Specification<Course> spec = CourseSpecifications.withFilters(searchRequest);
+
+        return repository.findAll(spec, pageable)
             .map(mapper::toResponse);
     }
 

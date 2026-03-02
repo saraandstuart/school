@@ -33,5 +33,5 @@ export TOKEN=$(curl -s \
 ## API Call Example
 
 ```shell
-curl -X 'POST' 'http://localhost:8080/v1/course' -d '{"name":"Linear Algebra","level":"IGCSE","subject":"Maths"}' -H "Authorization: Bearer $TOKEN"
+curl -X 'POST' 'http://localhost:8080/api/v1/course' -d '{"name":"Linear Algebra","level":"IGCSE","subject":"Maths"}' -H "Authorization: Bearer $TOKEN"
 ```
