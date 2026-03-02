@@ -1,5 +1,6 @@
 package com.shannoncode.school.modules.course;
 
+import com.shannoncode.school.modules.course.dto.CoursePatchRequest;
 import com.shannoncode.school.modules.course.dto.CourseRequest;
 import com.shannoncode.school.modules.course.dto.CourseResponse;
 import com.shannoncode.school.modules.course.dto.CourseSearchRequest;
@@ -19,6 +20,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -76,6 +78,16 @@ public class CourseController {
         @ParameterObject @PageableDefault(size = 20) Pageable pageable
     ) {
         return ResponseEntity.ok(courseService.searchCourses(searchRequest, pageable));
+    }
+
+    @PatchMapping("/{id}")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<CourseResponse> patchCourse(
+        @PathVariable Long id,
+        @Valid @RequestBody CoursePatchRequest request) {
+
+        CourseResponse updated = courseService.partialUpdate(id, request);
+        return ResponseEntity.ok(updated);
     }
 
     @DeleteMapping("/{id}")

@@ -1,4 +1,4 @@
-package com.shannoncode.school.modules.course;
+package com.shannoncode.school.modules.course.security;
 
 import com.shannoncode.school.modules.enrollment.EnrollmentRepository;
 import lombok.RequiredArgsConstructor;
